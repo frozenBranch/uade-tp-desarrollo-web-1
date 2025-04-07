@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fastik</title>
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            main {
+                display: flex;
+                flex-direction: row;
+            }
+
+            aside {
+                padding-top: 1rem;
+                padding-left: 1px;
+                padding-right: 1px;
+                width: 25%;
+                height: 100vh;
+                border: 1px solid black;
+            }
+
+            .playlist-item {
+                padding: 5px;
+                :hover {
+                    background-color: #acc6c1;
+                    cursor: pointer;
+                }
+            }
+
+            .playlist-link {
+                text-decoration: none;
+                color: black;
+                background-color: #d8eeea;
+                padding: 10px;
+                border-radius: 5px;
+                display: block;
+                margin-bottom: 10px;
+            }
+            section {
+                width: 75%;
+            }
+            footer {
+                text-align: center;
+                padding: 1rem;
+                background-color: #f1f1f1;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="navbar">
+                <a href="./index.html" class="nav-link">Inicio</a>
+                <a href="./tablas.html" class="nav-link">Cosas que me gusta romper</a>
+                <a href="./index.html#comida" class="nav-link">Comida Favorita</a>
+                <a href="./index.html#galeria" class="nav-link">Galería</a>
+                <a href="./juego.html" class="nav-link">Juego</a>
+                <a href="./playlist.html" class="nav-link">Playlist</a>
+            </nav>
+        </header>
+
+        <main>
+            <aside id="playlist-section"></aside>
+            <section style="text-align: center">
+                <h1>Videos</h1>
+                <p>¡Bienvenido a mi playlist de videos!</p>
+                <iframe
+                    id="youtube-player"
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/ei1cxrVp_v0"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </section>
+        </main>
+        <footer>
+            Fastik &copy; 2025
+        </footer>
+    </body>
+</html>
+
+<script>
+    const playlistSection = document.getElementById('playlist-section');
+
+    const playlists = [
+        {
+            name: 'Sobre Whiskas',
+            description: 'Nutrición completa',
+            videoId: 'ei1cxrVp_v0',
+        },
+        {
+            name: 'Gatos Graciosos',
+            description: 'Videos de Gatos Chistosos #233',
+            videoId: 'g8fbiFbT0X8',
+        },
+        {
+            name: 'Evolución de los gatos',
+            description: '🐈 Origen del gato que vive contigo en casa',
+            videoId: 'plJDGsh1UeA',
+        },
+    ];
+
+    playlists.forEach((playlist) => {
+        const playlistDiv = document.createElement('div');
+        playlistDiv.className = 'playlist';
+        playlistDiv.innerHTML = `
+        <div class="playlist-item">
+            <div class="playlist-link">
+                <h3>${playlist.name}</h3>
+                <p>${playlist.description}</p>
+            </div>
+        </div>
+        `;
+        playlistSection.appendChild(playlistDiv);
+    });
+
+    const playlistItems = document.querySelectorAll('.playlist-item');
+    playlistItems.forEach((link, index) => {
+        link.addEventListener('click', () => {
+            const videoId = playlists[index].videoId;
+            const youtubePlayer = document.getElementById('youtube-player');
+            youtubePlayer.src = `https://www.youtube.com/embed/${videoId}`;
+        });
+    });
+</script>
